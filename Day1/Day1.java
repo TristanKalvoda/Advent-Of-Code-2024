@@ -24,12 +24,13 @@ public class Day1 {
                 arr2[i] = myReader.nextInt();
             }
             myReader.close();
-            // There is now two arrays: 
+            // There is now two arrays:
             // arr1: first column's numbers
             // arr2: second column's numbers
 
-            System.out.println("Difference:"+getDifferences(arr1, arr2));
-            System.out.println("Similarity Score:"+getSimilarityScore(arr1, arr2));
+            System.out.println("Difference:" + getDifferences(arr1, arr2));
+            System.out.println("Similarity Score:" + getSimilarityScore(arr1, arr2));
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -39,22 +40,21 @@ public class Day1 {
         int sum = 0;
         Arrays.sort(arr1);
         Arrays.sort(arr2);
-        for(int i = 0; i<arr1.length; i++) {
-            sum += Math.abs((arr1[i]-arr2[i]));
+        for (int i = 0; i < arr1.length; i++) {
+            sum += Math.abs((arr1[i] - arr2[i]));
         }
         return sum;
     }
 
-    public static int getSimilarityScore(int[] arr1, int[] arr2){
+    public static int getSimilarityScore(int[] arr1, int[] arr2) {
         int similarityScore = 0;
-        for(int i = 0; i<arr1.length; i++) {
+        for (int i = 0; i < arr1.length; i++) {
             int tmp = 0;
-            for(int j = 0; j<arr1.length; j++) {
+            for (int j = 0; j < arr1.length; j++) {
                 if (arr1[i] == arr2[j]) tmp++;
             }
-            similarityScore += tmp*arr1[i];
+            similarityScore += tmp * arr1[i];
         }
         return similarityScore;
-        // Score:23472342 too low
     }
 }

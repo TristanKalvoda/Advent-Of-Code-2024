@@ -6,12 +6,7 @@ thresholdMin = 1
 thresholdMax = 3
 results = []
 
-with open(filename) as file:
-    for line in file:
-        line = line.strip()
-        lines.append(list(map(int, line.split(" "))))
-
-for i in range(len(lines)):
+def is_safe(line):
     safe = True
     increasing = False
     decreasing = False
@@ -20,11 +15,12 @@ for i in range(len(lines)):
         if abs(lines[i][j] - lines[i][j+1]) > thresholdMax:
             results.append("Unsafe")
             safe = False
-            break
+            return False
+        
         if abs(lines[i][j] - lines[i][j+1]) < thresholdMin:
             results.append("Unsafe")
             safe = False
-            break
+            return False
 
         # Check if the levels are either all increasing or all decreasing
         if lines[i][j] < lines[i][j + 1]:
@@ -36,8 +32,21 @@ for i in range(len(lines)):
         if increasing and decreasing:
             results.append("Unsafe")
             safe = False
-            break
+            return False
     if safe:
         results.append("Safe")
+
+with open(filename) as file:
+    for line in file:
+        line = line.strip()
+        lines.append(list(map(int, line.split(" "))))
+
+us = 0
+for i in range(len(lines)):
+    if is_safe(i) == False:
+        us =+ 1
+
+print(us)
+
 
 print(Counter(results))
